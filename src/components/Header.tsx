@@ -29,6 +29,14 @@ export function Header() {
             name: 'Twitter',
             link: 'https://twitter.com/bhumit070',
         },
+        {
+            name: 'Dev.to',
+            link: 'https://dev.to/bhumit070',
+        },
+        {
+            name: 'Medium',
+            link: 'https://medium.com/@bhumit070',
+        },
     ];
 
     return (
