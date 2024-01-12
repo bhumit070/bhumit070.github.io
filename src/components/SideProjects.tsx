@@ -11,20 +11,12 @@ export function SideProjects() {
             url: 'https://www.npmjs.com/package/jseassy',
         },
         {
-            name: 'Cli Resume',
-            url: 'https://github.com/bhumit070/cli-resume',
-        },
-        {
-            name: 'Google Docs Clone',
-            url: 'https://github.com/bhumit070/google-docs-clone',
-        },
-        {
             name: 'VsCode Extension',
             url: 'https://github.com/bhumit070/google-docs-clone',
         },
     ];
 
-    return (
+    return projects.length ? (
         <section className='section--page'>
             <h2>Side Projects</h2>
 
@@ -39,5 +31,5 @@ export function SideProjects() {
                 );
             })}
         </section>
-    );
+    ) : null;
 }
