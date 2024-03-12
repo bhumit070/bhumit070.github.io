@@ -30,6 +30,11 @@ export function BlogCard(props: BlogResponse) {
             <small style={{ display: 'block' }}>
                 Published on {readable_publish_date}
             </small>
+            <small style={{ display: 'block' }}>
+                {props.positive_reactions_count > 0
+                    ? `Liked by ${props.positive_reactions_count} Amazing People!`
+                    : 'Liked by none!'}
+            </small>
             {tag_list.length ? (
                 <div>
                     {tag_list.map((tag) => {
