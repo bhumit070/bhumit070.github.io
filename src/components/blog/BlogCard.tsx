@@ -33,7 +33,7 @@ export function BlogCard(props: BlogResponse) {
             <small style={{ display: 'block' }}>
                 {props.positive_reactions_count > 0
                     ? `Liked by ${props.positive_reactions_count} Amazing People!`
-                    : 'Liked by none!'}
+                    : 'Yet to be seen by amazing people!'}
             </small>
             {tag_list.length ? (
                 <div>
