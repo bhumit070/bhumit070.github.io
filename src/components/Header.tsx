@@ -42,11 +42,7 @@ export function Header() {
   return (
     <>
       <section id="wrapper--hero" className="section--page">
-        <img
-          id="profile-pic"
-          alt="Profile Pic"
-          src="https://media.licdn.com/dms/image/v2/D4D03AQFPgizuWKo50w/profile-displayphoto-shrink_400_400/B4DZTqhDAgGkAg-/0/1739101319844?e=1747267200&v=beta&t=x9QwZjsV7xRZCvsaundxgkolic7Qdb_yIIr8W570kws"
-        />
+        <img id="profile-pic" alt="Profile Pic" src="/public/image.png" />
 
         <div>
           <h1 id="user-name">Bhoomit Ganatra</h1>
