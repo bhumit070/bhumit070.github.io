@@ -42,7 +42,7 @@ export function Header() {
   return (
     <>
       <section id="wrapper--hero" className="section--page">
-        <img id="profile-pic" alt="Profile Pic" src="/public/image.png" />
+        <img id="profile-pic" alt="Profile Pic" src="/image.png" />
 
         <div>
           <h1 id="user-name">Bhoomit Ganatra</h1>
