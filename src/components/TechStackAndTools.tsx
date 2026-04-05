@@ -36,6 +36,10 @@ export function TechStackAndTools() {
           className: 'devicon-nestjs-plain colored devicon',
           title: 'Nest Js',
         },
+        {
+          className: 'devicon-fastify-plain devicon',
+          title: 'Fastify',
+        },
       ],
     },
     {
