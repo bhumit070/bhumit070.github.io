@@ -8,7 +8,7 @@ Personal portfolio website built to showcase projects, skills, and experience. L
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Build Tool**: [Vite](https://vitejs.dev/)
 - **Styling/Components**: `react-multi-carousel`, CSS
-- **Deployment**: [GitHub Pages](https://pages.github.com/) & `gh-pages` package
+- **Deployment**: [GitHub Pages](https://pages.github.com/) via GitHub Actions
 
 ## 📦 Prerequisites
 
@@ -41,8 +41,6 @@ The application will be available at `http://localhost:5173`.
 
 ## 🏗️ Build & Deploy
 
-This project uses `gh-pages` for deployment.
-
 - **To build the project for production**:
   ```bash
   yarn build
@@ -51,11 +49,7 @@ This project uses `gh-pages` for deployment.
   ```bash
   yarn preview
   ```
-- **To deploy to GitHub Pages**:
-  ```bash
-  yarn deploy
-  ```
-  _Note: This command automatically builds the project (`yarn predeploy`) and pushes the `dist` directory to the `gh-pages` branch._
+- **Deployment**: Every push to `main` triggers the [Deploy to GitHub Pages](.github/workflows/deploy.yml) workflow, which builds the site and publishes `dist` to GitHub Pages. It can also be run manually from the Actions tab.
 
 ## 🧹 Code Quality
 
