@@ -22,10 +22,6 @@ export function BlogStats({ blogs }: { blogs: Array<BlogResponse> }) {
       label: 'reactions collected',
     },
     { value: sum((blog) => blog.comments_count), label: 'comments received' },
-    {
-      value: sum((blog) => blog.reading_time_minutes),
-      label: 'minutes of reading',
-    },
   ];
 
   const tags = new Set(blogs.flatMap((blog) => blog.tag_list));

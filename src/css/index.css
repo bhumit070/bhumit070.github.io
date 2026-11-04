@@ -390,7 +390,7 @@ a {
 
 .blog--stats__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin: 0;
   border: 1px solid var(--mainBorderColor);
   border-radius: 10px;
@@ -429,16 +429,12 @@ a {
 }
 
 @media (max-width: 600px) {
-  .blog--stats__grid {
-    grid-template-columns: repeat(2, 1fr);
+  .blog--stats__item {
+    padding: 0.6em 0.75em;
   }
 
-  .blog--stats__item:nth-child(odd) {
-    border-left: none;
-  }
-
-  .blog--stats__item:nth-child(n + 3) {
-    border-top: 1px solid var(--mainBorderColor);
+  .blog--stats__value {
+    font-size: 1.4em;
   }
 }
 
