@@ -166,6 +166,7 @@ export function TechStackAndTools() {
         {techStack.map((stack) => {
           return (
             <div
+              key={stack.title}
               className="card--techstack"
               id={stack.title}
               title={stack.title}

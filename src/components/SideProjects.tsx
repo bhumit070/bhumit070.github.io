@@ -34,7 +34,7 @@ export function SideProjects() {
 
       {projects.map((project) => {
         return (
-          <div id={project.name} className="card--project">
+          <div key={project.name} id={project.name} className="card--project">
             <a href={project.url} target="_blank">
               <span>{project.name_prefix || '🏆'} </span> {project.name}
             </a>

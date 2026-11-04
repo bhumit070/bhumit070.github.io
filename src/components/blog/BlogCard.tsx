@@ -38,7 +38,11 @@ export function BlogCard(props: BlogResponse) {
       {tag_list.length ? (
         <div>
           {tag_list.map((tag) => {
-            return <span className="pill">{tag}</span>;
+            return (
+              <span key={tag} className="pill">
+                {tag}
+              </span>
+            );
           })}
         </div>
       ) : null}

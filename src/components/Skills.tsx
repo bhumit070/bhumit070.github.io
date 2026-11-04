@@ -23,7 +23,7 @@ export function Skills() {
       <h2>Skills & Qualifications</h2>
       <ul id="qualifications--list">
         {skills.map((skill) => (
-          <li>{skill}</li>
+          <li key={skill}>{skill}</li>
         ))}
       </ul>
     </section>

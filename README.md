@@ -13,12 +13,14 @@ Personal portfolio website built to showcase projects, skills, and experience. L
 ## 📦 Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - [Node.js](https://nodejs.org/) (v16 or higher recommended)
 - [Yarn](https://yarnpkg.com/) (Package Manager)
 
 ## 🛠️ Installation & Setup
 
 1. **Clone the repository** (if not already done):
+
    ```bash
    git clone https://github.com/bhumit070/bhumit070.github.io.git
    cd bhumit070.github.io

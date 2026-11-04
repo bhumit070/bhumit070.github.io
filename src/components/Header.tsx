@@ -61,7 +61,7 @@ export function Header() {
         <div id="socials--list">
           {socialLinks.map((socialLink) => {
             return (
-              <a href={socialLink.link} target="_blank">
+              <a key={socialLink.name} href={socialLink.link} target="_blank">
                 {socialLink.name}
               </a>
             );

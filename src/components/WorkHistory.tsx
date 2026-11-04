@@ -9,14 +9,14 @@ export function WorkHistory() {
 
       {workHistory.map((work) => {
         return (
-          <div className="card--work-history">
+          <div key={work.title_and_company} className="card--work-history">
             <strong>{work.title_and_company}</strong>
             <p>{work.from_and_to}</p>
             <p dangerouslySetInnerHTML={{ __html: work.description }}></p>
             <ul>
               {work.experience.map((experience) => (
                 <li
-                  id={experience}
+                  key={experience}
                   dangerouslySetInnerHTML={{
                     __html: experience,
                   }}
