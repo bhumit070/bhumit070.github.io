@@ -11,9 +11,11 @@ export function Skills() {
   }
 
   const skills: Array<string> = [
-    `✔️ ${yearsOfExperience} Years experience with Backend &
-                    Frontend development`,
-    `✔️ Extensive knowledge in API & Database Design.`,
+    `✔️ ${yearsOfExperience} Years of production MERN engineering with full ownership, end to end.`,
+    `✔️ +20% product usage from an AI/RAG chatbot built on OpenSearch vector search.`,
+    `✔️ Led an Azure → AWS platform migration and a legacy PHP → Node.js migration.`,
+    `✔️ -50% CI build time, -30% memory footprint, -25% latency on real-time Socket.IO/Redis infrastructure.`,
+    `✔️ Hands-on with distributed systems (Redis, RabbitMQ, OpenSearch) and automated testing (Vitest, PHPUnit).`,
   ];
 
   return (

@@ -7,7 +7,7 @@ type Project = {
 export function SideProjects() {
   const projects: Array<Project> = [
     {
-      name: 'Npm Package',
+      name: 'Jseassy - Npm Package',
       url: 'https://www.npmjs.com/package/jseassy',
     },
     {
@@ -19,11 +19,11 @@ export function SideProjects() {
       url: 'https://chromewebstore.google.com/detail/packageflex/kikhkjfhchalgdhdjfjjimlgbipmhlci',
     },
     {
-      name: 'Deps cleaner',
+      name: 'Deps Cleaner - Go CLI',
       url: 'https://github.com/bhumit070/deps-cleaner',
     },
     {
-      name: 'Destiny',
+      name: 'Destiny - Go CLI',
       url: 'https://github.com/bhumit070/destiny',
     },
   ];

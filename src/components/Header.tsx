@@ -47,7 +47,7 @@ export function Header() {
         <div>
           <h1 id="user-name">Bhoomit Ganatra</h1>
           <p id="bio">
-            Software developer, &nbsp;
+            Senior Full-Stack (MERN) Engineer, &nbsp;
             <a href={currentWorkingCompany.company_link || '#'} target="_blank">
               @{companyName}
             </a>

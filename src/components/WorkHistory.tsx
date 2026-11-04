@@ -12,7 +12,7 @@ export function WorkHistory() {
           <div className="card--work-history">
             <strong>{work.title_and_company}</strong>
             <p>{work.from_and_to}</p>
-            <p>{work.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: work.description }}></p>
             <ul>
               {work.experience.map((experience) => (
                 <li

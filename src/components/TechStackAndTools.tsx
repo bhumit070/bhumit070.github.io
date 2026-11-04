@@ -20,14 +20,22 @@ export function TechStackAndTools() {
           title: 'Javascript',
         },
         {
-          className: 'devicon-nodejs-plain colored devicon',
-          title: 'NodeJs',
+          className: 'devicon-go-original-wordmark colored devicon',
+          title: 'Go',
+        },
+        {
+          className: 'devicon-php-plain colored devicon',
+          title: 'PHP',
         },
       ],
     },
     {
-      title: 'Frameworks',
+      title: 'Backend',
       items: [
+        {
+          className: 'devicon-nodejs-plain colored devicon',
+          title: 'NodeJs',
+        },
         {
           className: 'devicon-express-original colored devicon',
           title: 'Express Js',
@@ -37,25 +45,20 @@ export function TechStackAndTools() {
           title: 'Nest Js',
         },
         {
-          className: 'devicon-fastify-plain devicon',
-          title: 'Fastify',
-        },
-      ],
-    },
-    {
-      title: 'Databases',
-      items: [
-        {
-          className: 'devicon-postgresql-plain-wordmark colored devicon',
-          title: 'Postgres',
+          className: 'devicon-graphql-plain colored devicon',
+          title: 'GraphQL',
         },
         {
-          className: 'devicon-mongodb-plain-wordmark colored devicon',
-          title: 'MongoDB',
+          className: 'devicon-socketio-original devicon',
+          title: 'Socket.IO',
         },
         {
-          className: 'devicon-mysql-plain-wordmark colored devicon',
-          title: 'MySQL',
+          className: 'devicon-rabbitmq-original colored devicon',
+          title: 'RabbitMQ',
+        },
+        {
+          className: 'devicon-elasticsearch-plain colored devicon',
+          title: 'Elasticsearch',
         },
         {
           className: 'devicon-redis-plain-wordmark colored devicon',
@@ -71,6 +74,10 @@ export function TechStackAndTools() {
           title: 'React',
         },
         {
+          className: 'devicon-nextjs-original-wordmark devicon',
+          title: 'Next Js',
+        },
+        {
           className: 'devicon-vuejs-line-wordmark devicon',
           title: 'Vue',
         },
@@ -81,11 +88,58 @@ export function TechStackAndTools() {
       ],
     },
     {
+      title: 'Databases',
+      items: [
+        {
+          className: 'devicon-mongodb-plain-wordmark colored devicon',
+          title: 'MongoDB',
+        },
+        {
+          className: 'devicon-postgresql-plain-wordmark colored devicon',
+          title: 'Postgres',
+        },
+        {
+          className: 'devicon-mysql-plain-wordmark colored devicon',
+          title: 'MySQL',
+        },
+      ],
+    },
+    {
       title: 'Devops',
       items: [
         {
           className: 'devicon-docker-plain-wordmark colored devicon',
           title: 'Docker',
+        },
+        {
+          className: 'devicon-linux-plain devicon',
+          title: 'Linux',
+        },
+        {
+          className: 'devicon-githubactions-plain colored devicon',
+          title: 'GitHub Actions',
+        },
+      ],
+    },
+    {
+      title: 'Cloud',
+      items: [
+        {
+          className: 'devicon-amazonwebservices-plain-wordmark colored devicon',
+          title: 'AWS',
+        },
+        {
+          className: 'devicon-azure-plain colored devicon',
+          title: 'Azure',
+        },
+      ],
+    },
+    {
+      title: 'Testing',
+      items: [
+        {
+          className: 'devicon-vitest-plain colored devicon',
+          title: 'Vitest',
         },
       ],
     },
