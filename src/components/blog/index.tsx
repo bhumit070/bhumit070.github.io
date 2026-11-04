@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { BlogCard } from './BlogCard';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import { BlogStats } from './BlogStats';
 
 export type BlogResponse = {
   type_of: string;
@@ -42,30 +41,33 @@ export type User = {
   profile_image_90: string;
 };
 
-const responsive = {
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-    slidesToSlide: 3, // optional, default to 1.
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    slidesToSlide: 2, // optional, default to 1.
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-    slidesToSlide: 1, // optional, default to 1.
-  },
-};
+const AUTOPLAY_INTERVAL_MS = 4000;
+
+// Fisher–Yates, so every reload leads with a different blog.
+function shuffle<T>(items: Array<T>): Array<T> {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 export function Blogs() {
-  const BLOG_API_URL = 'https://dev.to/api/articles?username=bhumit070';
+  // per_page defaults to 30; ask for everything so the stats stay accurate.
+  const BLOG_API_URL =
+    'https://dev.to/api/articles?username=bhumit070&per_page=1000';
 
   const [blogs, setBlogs] = useState<Array<BlogResponse>>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
 
   useEffect(() => {
     fetch(BLOG_API_URL)
@@ -77,7 +79,7 @@ export function Blogs() {
         }
       })
       .then((blogs: Array<BlogResponse>) => {
-        setBlogs(blogs);
+        setBlogs(shuffle(blogs));
       })
       .catch((e) => {
         setError(e.message || 'Something went wrong, while fetching blogs');
@@ -87,36 +89,146 @@ export function Blogs() {
       });
   }, []);
 
+  const goTo = useCallback(
+    (index: number) => {
+      const track = trackRef.current;
+      if (!track || !blogs.length) return;
+      const next = (index + blogs.length) % blogs.length;
+      track.scrollTo({
+        left: next * track.clientWidth,
+        behavior: reducedMotion ? 'auto' : 'smooth',
+      });
+    },
+    [blogs.length, reducedMotion]
+  );
+
+  // Keep the active dot in sync with however the user scrolls the track.
+  const onScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    setActiveIndex(Math.round(track.scrollLeft / track.clientWidth));
+  };
+
+  // Restarts on every slide change, so manual navigation resets the countdown.
+  useEffect(() => {
+    if (paused || reducedMotion || blogs.length < 2) return;
+    const timer = setTimeout(() => goTo(activeIndex + 1), AUTOPLAY_INTERVAL_MS);
+    return () => clearTimeout(timer);
+  }, [activeIndex, paused, reducedMotion, blogs.length, goTo]);
+
+  useEffect(() => {
+    const onVisibilityChange = () => setPaused(document.hidden);
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+  }, []);
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      goTo(activeIndex + 1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      goTo(activeIndex - 1);
+    }
+  };
+
   return (
     <section className="section--page" id="blog--container">
-      <h2>My Blogs</h2>
+      <div className="blog--header">
+        <h2>My Blogs</h2>
+        {blogs.length > 1 ? (
+          <div className="blog--controls">
+            <span className="blog--counter">
+              {activeIndex + 1} / {blogs.length}
+            </span>
+            <button
+              type="button"
+              className="blog--arrow"
+              aria-label="Previous blog"
+              onClick={() => goTo(activeIndex - 1)}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className="blog--arrow"
+              aria-label="Next blog"
+              onClick={() => goTo(activeIndex + 1)}
+            >
+              ›
+            </button>
+          </div>
+        ) : null}
+      </div>
       {loading ? (
         <div className="loader"></div>
       ) : error ? (
         error
       ) : blogs.length ? (
-        <>
-          <Carousel
-            swipeable={false}
-            draggable={false}
-            showDots={true}
-            responsive={responsive}
-            infinite={true}
-            autoPlay={true}
-            autoPlaySpeed={1000}
-            keyBoardControl={true}
-            customTransition="all .5"
-            transitionDuration={500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={['tablet', 'mobile']}
-            dotListClass="custom-dot-list-style"
-            itemClass="carousel-item-padding-40-px"
+        <div
+          className="blog--carousel"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="My blogs"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+        >
+          <div
+            ref={trackRef}
+            className="blog--track"
+            tabIndex={0}
+            onScroll={onScroll}
+            onKeyDown={onKeyDown}
           >
-            {blogs.map((blog) => (
-              <BlogCard key={blog.id} {...blog} />
+            {blogs.map((blog, index) => (
+              <div
+                key={blog.id}
+                className="blog--slide"
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${index + 1} of ${blogs.length}`}
+                aria-hidden={index !== activeIndex}
+              >
+                <BlogCard {...blog} />
+              </div>
             ))}
-          </Carousel>
-        </>
+          </div>
+
+          {blogs.length > 1 ? (
+            <>
+              <div className="blog--progress">
+                <div
+                  key={activeIndex}
+                  className="blog--progress__bar"
+                  style={{
+                    animationDuration: `${AUTOPLAY_INTERVAL_MS}ms`,
+                    animationPlayState: paused ? 'paused' : 'running',
+                    display: reducedMotion ? 'none' : undefined,
+                  }}
+                ></div>
+              </div>
+              <div className="blog--dots">
+                {blogs.map((blog, index) => (
+                  <button
+                    key={blog.id}
+                    type="button"
+                    className={`blog--dot${index === activeIndex ? ' blog--dot__active' : ''}`}
+                    aria-label={`Go to blog ${index + 1}`}
+                    aria-current={index === activeIndex}
+                    onClick={() => goTo(index)}
+                  ></button>
+                ))}
+              </div>
+            </>
+          ) : null}
+
+          <BlogStats blogs={blogs} />
+        </div>
       ) : (
         'No Blogs Found.'
       )}
