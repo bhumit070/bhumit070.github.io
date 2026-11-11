@@ -1,4 +1,4 @@
-import { BlogResponse } from '.';
+import type { BlogResponse } from '.';
 
 type Stat = {
   value: number;

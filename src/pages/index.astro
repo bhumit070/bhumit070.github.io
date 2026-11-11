@@ -1,0 +1,71 @@
+---
+import { Blogs } from '../components/blog';
+import { Header } from '../components/Header';
+import { SideProjects } from '../components/SideProjects';
+import { Skills } from '../components/Skills';
+import { TechStackAndTools } from '../components/TechStackAndTools';
+import { WorkHistory } from '../components/WorkHistory';
+import { getBuildTimeBlogs } from '../lib/devto';
+import '../css/index.css';
+
+const siteUrl = Astro.site?.href ?? '/';
+const title = "Bhoomit Ganatra's Resume";
+const description =
+  'Resume of Bhoomit Ganatra, Senior Full-Stack (MERN) Engineer';
+const image = 'https://placehold.co/1200x630/orange/white?text=BG';
+
+const blogs = await getBuildTimeBlogs();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={siteUrl} />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta property="twitter:domain" content={Astro.site?.host} />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <title>Bhoomit Ganatra</title>
+  </head>
+  <body>
+    <div id="container--main">
+      <Header />
+      <Skills />
+      <TechStackAndTools />
+      <WorkHistory />
+      <SideProjects />
+      {/* The only island: React loads for the blog carousel once it scrolls into view. */}
+      <Blogs client:visible initialBlogs={blogs} />
+    </div>
+
+    <script>
+      // Keep the experience number current between deploys.
+      import { getYearsOfExperience } from '../lib/experience';
+
+      const years = String(getYearsOfExperience());
+      document
+        .querySelectorAll('[data-years-of-experience]')
+        .forEach((el) => (el.textContent = years));
+    </script>
+  </body>
+</html>

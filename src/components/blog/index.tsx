@@ -1,6 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { BlogCard } from './BlogCard';
 import { BlogStats } from './BlogStats';
+import { fetchBlogs } from '../../lib/devto';
 
 export type BlogResponse = {
   type_of: string;
@@ -43,6 +50,10 @@ export type User = {
 
 const AUTOPLAY_INTERVAL_MS = 4000;
 
+// useLayoutEffect warns when rendered at build time; there's no layout there anyway.
+const useIsomorphicLayoutEffect =
+  typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
 // Fisher–Yates, so every reload leads with a different blog.
 function shuffle<T>(items: Array<T>): Array<T> {
   const shuffled = [...items];
@@ -53,32 +64,38 @@ function shuffle<T>(items: Array<T>): Array<T> {
   return shuffled;
 }
 
-export function Blogs() {
-  // per_page defaults to 30; ask for everything so the stats stay accurate.
-  const BLOG_API_URL =
-    'https://dev.to/api/articles?username=bhumit070&per_page=1000';
+type BlogsProps = {
+  // Fetched at build time so the static HTML already contains the blogs.
+  initialBlogs?: Array<BlogResponse>;
+};
 
-  const [blogs, setBlogs] = useState<Array<BlogResponse>>([]);
-  const [loading, setLoading] = useState(true);
+export function Blogs({ initialBlogs = [] }: BlogsProps) {
+  const [blogs, setBlogs] = useState<Array<BlogResponse>>(initialBlogs);
+  const [loading, setLoading] = useState(initialBlogs.length === 0);
   const [error, setError] = useState<string | null>(null);
 
   const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [reducedMotion] = useState(
-    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  );
+  // Read after mount: `window` doesn't exist while rendering at build time.
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    fetch(BLOG_API_URL)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Something went wrong: ${response.status}`);
-        } else {
-          return response.json();
-        }
+    setReducedMotion(
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    );
+  }, []);
+
+  // Refresh from dev.to so posts published after the last build still show.
+  useEffect(() => {
+    fetchBlogs()
+      .catch((e) => {
+        // Fall back to the build-time blogs if the refresh fails.
+        if (!initialBlogs.length) throw e;
+        return initialBlogs;
       })
-      .then((blogs: Array<BlogResponse>) => {
+      .then((blogs) => {
+        // Shuffle once, so every reload leads with a different blog.
         setBlogs(shuffle(blogs));
       })
       .catch((e) => {
@@ -87,6 +104,8 @@ export function Blogs() {
       .finally(() => {
         setLoading(false);
       });
+    // Runs once on mount; initialBlogs never changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const goTo = useCallback(
@@ -101,6 +120,13 @@ export function Blogs() {
     },
     [blogs.length, reducedMotion]
   );
+
+  // Scroll snapping follows the visible slide when the list is reshuffled,
+  // so jump back to the first slide whenever the blogs are replaced.
+  useIsomorphicLayoutEffect(() => {
+    if (trackRef.current) trackRef.current.scrollLeft = 0;
+    setActiveIndex(0);
+  }, [blogs]);
 
   // Keep the active dot in sync with however the user scrolls the track.
   const onScroll = () => {

@@ -1,4 +1,4 @@
-import { BlogResponse } from '.';
+import type { BlogResponse } from '.';
 
 export function BlogCard(props: BlogResponse) {
   const {
