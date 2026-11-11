@@ -1,0 +1,81 @@
+# Bhoomit Ganatra
+
+> Personal portfolio and resume of Bhoomit Ganatra, a Senior Full-Stack (MERN) Engineer at Cornerstone OnDemand (Pune, India). He has worked in production software engineering since December 2020, mostly on Node.js/TypeScript backends, real-time systems, cloud migrations and AI/RAG features.
+
+This site is a single-page React app. Its full content is summarised below, so you don't need to run JavaScript to read it. Blog posts are loaded at runtime from the dev.to API.
+
+## Profile
+
+- Name: Bhoomit Ganatra (GitHub handle: bhumit070)
+- Role: Senior Full-Stack (MERN) Engineer at Cornerstone OnDemand, building MyGuide.org
+- Location: Pune, India (hybrid)
+- Professional experience since: December 2020
+- Open to freelance work through Upwork
+
+## Highlights
+
+- Built an AI chatbot on a RAG pipeline with OpenSearch vector search, which raised product usage by 20%
+- Led a platform migration from Azure to AWS and a legacy PHP to Node.js migration
+- Cut CI build time by 50%, memory footprint by 30%, and latency on real-time Socket.IO/Redis infrastructure by 25%
+- Hands-on with distributed systems (Redis, RabbitMQ, OpenSearch) and automated testing (Vitest, PHPUnit)
+
+## Work History
+
+### Software Engineer, Cornerstone OnDemand (11/2023 to present, Pune, hybrid)
+
+Building MyGuide.org (https://myguide.org).
+
+- Designed and shipped an AI chatbot using a RAG pipeline with OpenSearch vector search, increasing product usage by 20%
+- Led the migration of the whole platform from Azure to AWS to get larger committed-use discounts. Spotted that a CloudFront/S3 wildcard folder-access policy could replace a proposed Lambda-based signature check, which avoided extra compute cost
+- Led the migration of a legacy PHP codebase to Node.js across core services, backed by automated tests in PHPUnit and Vitest, with no disruption to existing users
+- Re-architected Docker builds into a multistage pipeline in GitHub Actions, cutting CI build time by 50%
+- Diagnosed and fixed long-standing Redis and cURL issues in legacy services, reducing memory usage by 30%
+
+### MERN Developer, Yudiz Solution (02/2022 to 11/2023, Ahmedabad, onsite)
+
+- Took full ownership of the company's video-calling platform (architecture, roadmap and maintenance) and led a refactor of its core modules that cut latency by 25%
+- Built scalable game APIs and real-time systems with Socket.IO and Redis Pub/Sub, improving performance and reliability by 30%
+- Mentored 3 junior developers on the MERN stack and contributed to internal onboarding and training
+
+### JavaScript Developer, Freelance (12/2020 to 02/2022, remote)
+
+- Built Node.js APIs powering several client web applications
+- Developed React and Vue applications, introducing TypeScript, GraphQL and PWAs
+- Re-architected a frontend-heavy client app from fetching whole datasets on every request to targeted, field-scoped API calls, cutting initial load time from about 5 minutes to 10-12 seconds (about 95% faster)
+
+## Tech Stack
+
+- Languages: TypeScript, JavaScript, Go, PHP
+- Backend: Node.js, Express, NestJS, GraphQL, Socket.IO, RabbitMQ, Elasticsearch/OpenSearch, Redis
+- Frontend: React, Next.js, Vue, Nuxt
+- Databases: MongoDB, PostgreSQL, MySQL
+- DevOps: Docker, Linux, GitHub Actions
+- Cloud: AWS, Azure
+- Testing: Vitest, PHPUnit
+- Editors: VS Code, Vim
+
+## Side Projects
+
+- [Jseassy](https://www.npmjs.com/package/jseassy): npm package
+- [VS Code extension](https://github.com/bhumit070/google-docs-clone)
+- [Package Flex](https://chromewebstore.google.com/detail/packageflex/kikhkjfhchalgdhdjfjjimlgbipmhlci): Chrome extension
+- [Deps Cleaner](https://github.com/bhumit070/deps-cleaner): Go CLI
+- [Destiny](https://github.com/bhumit070/destiny): Go CLI
+
+## Writing
+
+- [Blog on dev.to](https://dev.to/bhumit070): technical articles, also shown on this site
+- [dev.to articles API](https://dev.to/api/articles?username=bhumit070&per_page=1000): JSON list of all published articles
+- [Medium](https://medium.com/@bhumit070)
+
+## Links
+
+- [Portfolio](https://bhumit070.github.io/)
+- [GitHub](https://github.com/bhumit070/)
+- [LinkedIn](https://www.linkedin.com/in/bhoomit-ganatra/)
+- [Twitter / X](https://twitter.com/bhumit070)
+- [Hire on Upwork](https://www.upwork.com/freelancers/~01d62cbe58c2a02090)
+
+## Optional
+
+- [Site source code](https://github.com/bhumit070/bhumit070.github.io): React + Vite + TypeScript, deployed to GitHub Pages with GitHub Actions
