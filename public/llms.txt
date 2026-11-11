@@ -70,7 +70,7 @@ Building MyGuide.org (https://myguide.org).
 
 ## Links
 
-- [Portfolio](https://bhumit070.github.io/)
+- [Portfolio](https://bhumit070.bid/)
 - [GitHub](https://github.com/bhumit070/)
 - [LinkedIn](https://www.linkedin.com/in/bhoomit-ganatra/)
 - [Twitter / X](https://twitter.com/bhumit070)

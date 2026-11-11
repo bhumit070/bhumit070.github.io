@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bhumit070.github.io/sitemap.xml
+Sitemap: https://bhumit070.bid/sitemap.xml
