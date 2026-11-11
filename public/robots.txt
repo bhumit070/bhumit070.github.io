@@ -1,0 +1,5 @@
+# Allow all crawlers, including search engines and AI/LLM agents.
+User-agent: *
+Allow: /
+
+Sitemap: https://bhumit070.github.io/sitemap.xml
